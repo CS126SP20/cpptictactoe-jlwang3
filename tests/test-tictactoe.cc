@@ -14,3 +14,35 @@ using tictactoe::TicTacToeState;
 TEST_CASE("No winner", "[no-winner]") {
   REQUIRE(EvaluateBoard("xxoooxxxo") == TicTacToeState::NoWinner);
 }
+
+TEST_CASE("X wins", "[x-wins]") {
+    REQUIRE(EvaluateBoard("xO..xo..x") == TicTacToeState::Xwins);
+}
+
+TEST_CASE("X wins", "[x-wins]") {
+    REQUIRE(EvaluateBoard("xxxo.o...") == TicTacToeState::Xwins);
+}
+
+TEST_CASE("O wins", "[o-wins]") {
+    REQUIRE(EvaluateBoard("XXO.XO.O..") == TicTacToeState::Owins);
+}
+
+TEST_CASE("O wins", "[o-wins]") {
+    REQUIRE(EvaluateBoard("oOo.x.x.x") == TicTacToeState::Owins);
+}
+
+TEST_CASE("Unreachable state", "[unreachable-state]") {
+    REQUIRE(EvaluateBoard("xo..xo.ox") == TicTacToeState::UnreachableState);
+}
+
+TEST_CASE("Unreachable state", "[unreachable-state]") {
+    REQUIRE(EvaluateBoard("xxxoxooox") == TicTacToeState::UnreachableState);
+}
+
+TEST_CASE("Unreachable state", "[unreachable-state]") {
+    REQUIRE(EvaluateBoard("x..x.x.xO") == TicTacToeState::UnreachableState);
+}
+
+TEST_CASE("Invalid input", "[invalid-input]") {
+    REQUIRE(EvaluateBoard("XXO.XO.O..-") == TicTacToeState::InvalidInput);
+}
