@@ -23,6 +23,8 @@ TicTacToeState EvaluateBoard(const string& setBoard) {
         board[i] = toupper(setBoard[i]);
     }
 
+    //check isUnreachableState
+
 
 
   return TicTacToeState::NoWinner;
@@ -60,6 +62,20 @@ TicTacToeState ThreeInARow(const string& setString) {
     || (setString[boardSize - 1] == 'O' && setString[boardLength / 2] == 'O' && setString[boardSize * (boardSize - 1)] == 'O')) {
         return static_cast<TicTacToeState>('O');
     }
+}
+/**
+ * This method determines whether or not the board is an unreachable state.
+ * Returns a boolean.
+ */
+TicTacToeState isUnreachableState(const string& setString) {
+    //https://stackoverflow.com/questions/3867890/count-character-occurrences-in-a-string-in-c
+        size_t x = std::count(setString.begin(), setString.end(), 'X');
+        size_t o = std::count(setString.begin(), setString.end(), 'O');
+        if (x == o || x == o + 1) {
+            return static_cast<TicTacToeState>(true);
+        }
+        //if there is a x == o and x has three in a row, if x == o + 1 and o has three in a row,
+        // if there are any two instances of three in a row, it is an unreachable state.
 }
 
 }  // namespace tictactoe

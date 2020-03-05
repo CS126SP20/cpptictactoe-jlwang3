@@ -47,6 +47,10 @@ TEST_CASE("Unreachable state", "[unreachable-state]") {
     REQUIRE(EvaluateBoard("x..x.x.xO") == TicTacToeState::UnreachableState);
 }
 
+TEST_CASE("Unreachable state", "[unreachable-state]") {
+    REQUIRE(EvaluateBoard("xoxxo..ox") == TicTacToeState::UnreachableState);
+}
+
 TEST_CASE("Invalid input", "[invalid-input]") {
     REQUIRE(EvaluateBoard("XXO.XO.O..-") == TicTacToeState::InvalidInput);
 }
