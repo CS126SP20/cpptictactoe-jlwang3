@@ -25,7 +25,7 @@ TicTacToeState EvaluateBoard(const string& setBoard) {
 
     //check isUnreachableState
 
-
+    //Use Three in a Row function. Otherwise... no winner. 
 
   return TicTacToeState::NoWinner;
 }
