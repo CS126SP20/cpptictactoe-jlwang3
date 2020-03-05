@@ -9,20 +9,20 @@
 namespace tictactoe {
 
 using std::string;
+std:: string board;
 const static int boardLength = 9;
 
-TicTacToeState EvaluateBoard(const string& board) {
+TicTacToeState EvaluateBoard(const string& setBoard) {
 
-    //https://stackoverflow.com/questions/735204/convert-a-string-in-c-to-upper-case
-    std::string = std::transform(board.begin(), board.end(), board.begin(), ::toupper);
-
-    std::string BOARD [boardLength] =
-
-    for (int n = 0; n < boardLength; n++) {
-        std::string BOARD [n] = string.sub
+    if (setBoard.length() != 9) {
+        return TicTacToeState::InvalidInput
     }
 
+    for (int i = 0; i < board.length(); i++) {
+        board[i] = toupper(setBoard[i]);
+    }
 
+    
   return TicTacToeState::NoWinner;
 }
 
