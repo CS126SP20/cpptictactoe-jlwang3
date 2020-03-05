@@ -15,6 +15,10 @@ TEST_CASE("No winner", "[no-winner]") {
   REQUIRE(EvaluateBoard("xxoooxxxo") == TicTacToeState::NoWinner);
 }
 
+TEST_CASE("No winner", "[no-winner]") {
+    REQUIRE(EvaluateBoard("xo.......") == TicTacToeState::NoWinner);
+}
+
 TEST_CASE("X wins", "[x-wins]") {
     REQUIRE(EvaluateBoard("xO..xo..x") == TicTacToeState::Xwins);
 }
