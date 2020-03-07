@@ -20,7 +20,6 @@ const static int boardLength = 9;
  * @return A map of X's and O's.
  */
     TicTacToeState ThreeInARow(const string& setString) {
-        //https://www.techiedelight.com/increment-map-value-associated-with-key-cpp/
         std::map <char, int> freqOfXO;
         for (int i = 0; i < boardSize; i++) {
             if (setString[boardSize * i] == 'X' && setString[boardSize * i + 1] == 'X' && setString[boardSize * i + 2] == 'X') {
@@ -78,7 +77,6 @@ TicTacToeState EvaluateBoard(const string& setBoard) {
         board[i] = toupper(setBoard[i]);
     }
 
-    //check isUnreachableState
     if (IsUnreachableState) {
         return TicTacToeState::UnreachableState;
     }
