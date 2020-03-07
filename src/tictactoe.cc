@@ -23,7 +23,7 @@ const static int boardLength = 9;
         std::map <char, int> freqOfXO;
         for (int i = 0; i < boardSize; i++) {
             if (board[boardSize * i] == 'X' && board[boardSize * i + 1] == 'X' && board[boardSize * i + 2] == 'X') {
-                return static_cast<TicTacToeState>('X');
+                freqOfXO.insert('X', freqOfXO.count('X') + 1);
             }
             if (board[boardSize * i] == 'O' && board[boardSize * i + 1] == 'O' && board[boardSize * i + 2] == 'O') {
                 return static_cast<TicTacToeState>('O');
