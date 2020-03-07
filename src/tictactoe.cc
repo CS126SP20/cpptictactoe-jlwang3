@@ -73,7 +73,7 @@ TicTacToeState EvaluateBoard(const string& setBoard) {
         return TicTacToeState::InvalidInput;
     }
 
-    for (int i = 0; i < board.length(); i++) {
+    for (int i = 0; i < boardLength; i++) {
         board[i] = toupper(setBoard[i]);
     }
 
