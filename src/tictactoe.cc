@@ -16,35 +16,35 @@ const static int boardLength = 9;
 
 /**
  * This method checks for three in a row.
- * @param setString The parameter should already be a string of length 9 in all upper case.
+ * @param board The parameter should already be a string of length 9 in all upper case.
  * @return A map of X's and O's.
  */
-    TicTacToeState ThreeInARow(const string& setString) {
+    TicTacToeState ThreeInARow() {
         std::map <char, int> freqOfXO;
         for (int i = 0; i < boardSize; i++) {
-            if (setString[boardSize * i] == 'X' && setString[boardSize * i + 1] == 'X' && setString[boardSize * i + 2] == 'X') {
+            if (board[boardSize * i] == 'X' && board[boardSize * i + 1] == 'X' && board[boardSize * i + 2] == 'X') {
                 return static_cast<TicTacToeState>('X');
             }
-            if (setString[boardSize * i] == 'O' && setString[boardSize * i + 1] == 'O' && setString[boardSize * i + 2] == 'O') {
+            if (board[boardSize * i] == 'O' && board[boardSize * i + 1] == 'O' && board[boardSize * i + 2] == 'O') {
                 return static_cast<TicTacToeState>('O');
             }
         }
 
         for (int i = 0; i < boardSize; i++) {
-            if (setString[boardSize * 0 + i] == 'X' && setString[boardSize * 1 + i] == 'X' && setString[boardSize * 2 + i] == 'X') {
+            if (board[boardSize * 0 + i] == 'X' && board[boardSize * 1 + i] == 'X' && board[boardSize * 2 + i] == 'X') {
                 return static_cast<TicTacToeState>('X');
             }
-            if (setString[boardSize * 0 + i] == 'O' && setString[boardSize * 1 + i] == 'O' && setString[boardSize * 2 + i] == 'O') {
+            if (board[boardSize * 0 + i] == 'O' && board[boardSize * 1 + i] == 'O' && board[boardSize * 2 + i] == 'O') {
                 return static_cast<TicTacToeState>('O');
             }
         }
 
-        if ((setString[0] == 'X' && setString[boardLength / 2] == 'X' && setString[boardLength - 1] == 'X')
-            || (setString[boardSize - 1] == 'X' && setString[boardLength / 2] == 'X' && setString[boardSize * (boardSize - 1)] == 'X')) {
+        if ((board[0] == 'X' && board[boardLength / 2] == 'X' && board[boardLength - 1] == 'X')
+            || (board[boardSize - 1] == 'X' && board[boardLength / 2] == 'X' && board[boardSize * (boardSize - 1)] == 'X')) {
             return static_cast<TicTacToeState>('X');
         }
-        if ((setString[0] == 'O' && setString[boardLength / 2] == 'O' && setString[boardLength - 1] == 'O')
-            || (setString[boardSize - 1] == 'O' && setString[boardLength / 2] == 'O' && setString[boardSize * (boardSize - 1)] == 'O')) {
+        if ((board[0] == 'O' && board[boardLength / 2] == 'O' && board[boardLength - 1] == 'O')
+            || (board[boardSize - 1] == 'O' && board[boardLength / 2] == 'O' && board[boardSize * (boardSize - 1)] == 'O')) {
             return static_cast<TicTacToeState>('O');
         }
     }
@@ -53,10 +53,10 @@ const static int boardLength = 9;
  * This method determines whether or not the board is an unreachable state using knowledge of how many X and O's there are.
  * Returns a boolean.
  */
-    TicTacToeState IsUnreachableState(const string& setString) {
+    TicTacToeState IsUnreachableState() {
         //https://stackoverflow.com/questions/3867890/count-character-occurrences-in-a-string-in-c
-        size_t x = std::count(setString.begin(), setString.end(), 'X');
-        size_t o = std::count(setString.begin(), setString.end(), 'O');
+        size_t x = std::count(board.begin(), board.end(), 'X');
+        size_t o = std::count(board.begin(), board.end(), 'O');
         if (x != o && x != o + 1) {
             return static_cast<TicTacToeState>(true);
         }
