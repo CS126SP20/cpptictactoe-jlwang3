@@ -51,7 +51,7 @@ const static int boardLength = 9;
     }
 
 /**
- * This method determines whether or not the board is an unreachable state.
+ * This method determines whether or not the board is an unreachable state using knowledge of how many X and O's there are.
  * Returns a boolean.
  */
     TicTacToeState IsUnreachableState(const string& setString) {

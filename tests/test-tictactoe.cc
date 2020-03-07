@@ -28,7 +28,7 @@ TEST_CASE("X wins", "[x-wins]") {
 }
 
 TEST_CASE("O wins", "[o-wins]") {
-    REQUIRE(EvaluateBoard("XXO.XO.O..") == TicTacToeState::Owins);
+    REQUIRE(EvaluateBoard("XXO.XO..O") == TicTacToeState::Owins);
 }
 
 TEST_CASE("O wins", "[o-wins]") {
