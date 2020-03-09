@@ -10,16 +10,14 @@
 namespace tictactoe {
 
 using std::string;
-using std::char_traits;
 std:: string board;
 const static int boardSize = 3;
 const static int boardLength = 9;
 
 /**
- * This method checks for three in a row.
- * @param board The parameter should already be a string of length 9 in all upper case.
+ * This method checks for the number of instances of three in a row.
  */
-    int ThreeInARow() {
+    int ThreeInARowCount() {
         int threeInARowCount = 0;
         for (int i = 0; i < boardSize; i++) {
             if (board[boardSize * i] == 'X' && board[boardSize * i + 1] == 'X' && board[boardSize * i + 2] == 'X') {
@@ -47,11 +45,53 @@ const static int boardLength = 9;
             || (board[boardSize - 1] == 'O' && board[boardLength / 2] == 'O' && board[boardSize * (boardSize - 1)] == 'O')) {
             threeInARowCount++;
         }
+        return threeInARowCount;
+    }
+
+    /**
+     * This method determines whether X has three in a row.
+     */
+    bool XHasThreeInARow() {
+        for (int i = 0; i < boardSize; i++) {
+            if (board[boardSize * i] == 'X' && board[boardSize * i + 1] == 'X' && board[boardSize * i + 2] == 'X') {
+                return true;
+            }
+        }
+
+        for (int i = 0; i < boardSize; i++) {
+            if (board[boardSize * 0 + i] == 'X' && board[boardSize * 1 + i] == 'X' && board[boardSize * 2 + i] == 'X') {
+                return true;
+            }
+        }
+
+        return (board[0] == 'X' && board[boardLength / 2] == 'X' && board[boardLength - 1] == 'X')
+               || (board[boardSize - 1] == 'X' && board[boardLength / 2] == 'X' &&
+                   board[boardSize * (boardSize - 1)] == 'X');
+    }
+
+    /**
+     * This method determines whether O has three in a row.
+     */
+    bool OHasThreeInARow() {
+        for (int i = 0; i < boardSize; i++) {
+            if (board[boardSize * i] == 'O' && board[boardSize * i + 1] == 'O' && board[boardSize * i + 2] == 'O') {
+                return true;
+            }
+        }
+
+        for (int i = 0; i < boardSize; i++) {
+            if (board[boardSize * 0 + i] == 'O' && board[boardSize * 1 + i] == 'O' && board[boardSize * 2 + i] == 'O') {
+                return true;
+            }
+        }
+
+        return (board[0] == 'O' && board[boardLength / 2] == 'O' && board[boardLength - 1] == 'O')
+               || (board[boardSize - 1] == 'O' && board[boardLength / 2] == 'O' &&
+                   board[boardSize * (boardSize - 1)] == 'O');
     }
 
 /**
- * This method determines whether or not the board is an unreachable state using knowledge of how many X and O's there are.
- * Returns a boolean.
+ * This method determines whether or not the board is an unreachable state.
  */
     bool IsUnreachableState() {
         //https://stackoverflow.com/questions/3867890/count-character-occurrences-in-a-string-in-c
@@ -60,11 +100,7 @@ const static int boardLength = 9;
         if (x != o && x != o + 1) {
             return true;
         }
-        if (x == 0) {
-            //if (ThreeInARow(setString)
-        }
-        //if there is a x == o and x has three in a row, if x == o + 1 and o has three in a row,
-        // if there are any two instances of three in a row, it is an unreachable state.
+        return (x == o && XHasThreeInARow()) || ((x == o + 1 && OHasThreeInARow()) || ThreeInARowCount() > 1);
     }
 
 TicTacToeState EvaluateBoard(const string& setBoard) {
@@ -77,19 +113,20 @@ TicTacToeState EvaluateBoard(const string& setBoard) {
         board[i] = toupper(setBoard[i]);
     }
 
-    if (IsUnreachableState) {
+    if (&IsUnreachableState) {
         return TicTacToeState::UnreachableState;
     }
 
-    //Use Three in a Row function. Otherwise... no winner.
-    if (ThreeInARow == 'X') {
+    if (XHasThreeInARow()) {
         return TicTacToeState::Xwins;
     }
-    if (ThreeInARow == 'O') {
+
+    if (OHasThreeInARow()) {
         return TicTacToeState::Owins;
     }
 
   return TicTacToeState::NoWinner;
+    
 }
 
 
