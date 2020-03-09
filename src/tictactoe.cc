@@ -37,12 +37,19 @@ const static int boardLength = 9;
             }
         }
 
-        if ((board[0] == 'X' && board[boardLength / 2] == 'X' && board[boardLength - 1] == 'X')
-            || (board[boardSize - 1] == 'X' && board[boardLength / 2] == 'X' && board[boardSize * (boardSize - 1)] == 'X')) {
+        if ((board[0] == 'X' && board[boardLength / 2] == 'X' && board[boardLength - 1] == 'X')) {
             threeInARowCount++;
         }
-        if ((board[0] == 'O' && board[boardLength / 2] == 'O' && board[boardLength - 1] == 'O')
-            || (board[boardSize - 1] == 'O' && board[boardLength / 2] == 'O' && board[boardSize * (boardSize - 1)] == 'O')) {
+
+        if ((board[boardSize - 1] == 'X' && board[boardLength / 2] == 'X' && board[boardSize * (boardSize - 1)] == 'X')) {
+            threeInARowCount++;
+        }
+
+        if ((board[0] == 'O' && board[boardLength / 2] == 'O' && board[boardLength - 1] == 'O')) {
+            threeInARowCount++;
+        }
+
+        if ((board[boardSize - 1] == 'O' && board[boardLength / 2] == 'O' && board[boardSize * (boardSize - 1)] == 'O')) {
             threeInARowCount++;
         }
         return threeInARowCount;
@@ -95,12 +102,25 @@ const static int boardLength = 9;
  */
     bool IsUnreachableState() {
         //https://stackoverflow.com/questions/3867890/count-character-occurrences-in-a-string-in-c
-        size_t x = std::count(board.begin(), board.end(), 'X');
-        size_t o = std::count(board.begin(), board.end(), 'O');
+        int x = 0;
+        int o = 0;
+
+        for (int i = 0; i < boardLength; i++) {
+            if (board[i] == 'X') {
+                x++;
+            }
+            if (board[i] == 'O') {
+                o++;
+            }
+        }
+
+        if (ThreeInARowCount() > 1) {
+            return true;
+        }
         if (x != o && x != o + 1) {
             return true;
         }
-        return (x == o && XHasThreeInARow()) || ((x == o + 1 && OHasThreeInARow()) || ThreeInARowCount() > 1);
+        return (x == o && XHasThreeInARow()) || ((x == o + 1 && OHasThreeInARow()));
     }
 
 TicTacToeState EvaluateBoard(const string& setBoard) {
@@ -113,7 +133,7 @@ TicTacToeState EvaluateBoard(const string& setBoard) {
         board[i] = toupper(setBoard[i]);
     }
 
-    if (&IsUnreachableState) {
+    if (IsUnreachableState()) {
         return TicTacToeState::UnreachableState;
     }
 
@@ -126,7 +146,7 @@ TicTacToeState EvaluateBoard(const string& setBoard) {
     }
 
   return TicTacToeState::NoWinner;
-    
+
 }
 
 
