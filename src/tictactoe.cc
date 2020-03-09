@@ -10,6 +10,7 @@
 namespace tictactoe {
 
 using std::string;
+using std::char_traits;
 std:: string board;
 const static int boardSize = 3;
 const static int boardLength = 9;
@@ -17,35 +18,34 @@ const static int boardLength = 9;
 /**
  * This method checks for three in a row.
  * @param board The parameter should already be a string of length 9 in all upper case.
- * @return A map of X's and O's.
  */
-    TicTacToeState ThreeInARow() {
-        std::map <char, int> freqOfXO;
+    int ThreeInARow() {
+        int threeInARowCount = 0;
         for (int i = 0; i < boardSize; i++) {
             if (board[boardSize * i] == 'X' && board[boardSize * i + 1] == 'X' && board[boardSize * i + 2] == 'X') {
-                freqOfXO.insert('X', freqOfXO.count('X') + 1);
+                threeInARowCount++;
             }
             if (board[boardSize * i] == 'O' && board[boardSize * i + 1] == 'O' && board[boardSize * i + 2] == 'O') {
-                return static_cast<TicTacToeState>('O');
+                threeInARowCount++;
             }
         }
 
         for (int i = 0; i < boardSize; i++) {
             if (board[boardSize * 0 + i] == 'X' && board[boardSize * 1 + i] == 'X' && board[boardSize * 2 + i] == 'X') {
-                return static_cast<TicTacToeState>('X');
+                threeInARowCount++;
             }
             if (board[boardSize * 0 + i] == 'O' && board[boardSize * 1 + i] == 'O' && board[boardSize * 2 + i] == 'O') {
-                return static_cast<TicTacToeState>('O');
+                threeInARowCount++;
             }
         }
 
         if ((board[0] == 'X' && board[boardLength / 2] == 'X' && board[boardLength - 1] == 'X')
             || (board[boardSize - 1] == 'X' && board[boardLength / 2] == 'X' && board[boardSize * (boardSize - 1)] == 'X')) {
-            return static_cast<TicTacToeState>('X');
+            threeInARowCount++;
         }
         if ((board[0] == 'O' && board[boardLength / 2] == 'O' && board[boardLength - 1] == 'O')
             || (board[boardSize - 1] == 'O' && board[boardLength / 2] == 'O' && board[boardSize * (boardSize - 1)] == 'O')) {
-            return static_cast<TicTacToeState>('O');
+            threeInARowCount++;
         }
     }
 
@@ -53,12 +53,12 @@ const static int boardLength = 9;
  * This method determines whether or not the board is an unreachable state using knowledge of how many X and O's there are.
  * Returns a boolean.
  */
-    TicTacToeState IsUnreachableState() {
+    bool IsUnreachableState() {
         //https://stackoverflow.com/questions/3867890/count-character-occurrences-in-a-string-in-c
         size_t x = std::count(board.begin(), board.end(), 'X');
         size_t o = std::count(board.begin(), board.end(), 'O');
         if (x != o && x != o + 1) {
-            return static_cast<TicTacToeState>(true);
+            return true;
         }
         if (x == 0) {
             //if (ThreeInARow(setString)
